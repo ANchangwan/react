@@ -18,6 +18,18 @@ class App extends React.Component{
       ]
     }
   }
+  chnageMode(){
+    if(this.state.mode === "read"){
+      this.setState({
+        mode:"welcome"
+      })
+    }
+    else{
+      this.setState({
+          mode:"read"
+      })
+    }
+  }
   render(){
     const {title, sub} = this.state.subject;
     let _title, _desc = null;
@@ -33,7 +45,11 @@ class App extends React.Component{
       <div className="App">
         <Subject 
             title={title} 
-            sub={sub}/>
+            sub={sub}
+            onChangePage ={() =>
+              this.chnageMode()
+            }
+            />
         <TOC data={this.state.contents}/>
         <Contents title={_title} desc={_desc} />
     </div>
