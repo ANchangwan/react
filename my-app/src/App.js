@@ -107,10 +107,27 @@ class App extends React.Component{
            }
          }
          data={this.state.contents}/>
-        <Control onChangeMode={(mode)=>{
-          this.setState({
-            mode:mode
-          })
+         
+        <Control onChangeMode={(_mode)=>{
+          if(_mode === "delete"){  
+            if(window.confirm("할거야?")){
+              let i = 0;
+              let _content = Array.from(this.state.contents);
+              while(i < _content.length){
+                if (_content[i].id === this.state.select_contents_id){
+                  _content.splice(i, 1);
+                  break;
+                }
+                i += 1
+              }
+              this.setState({
+                mode:"welcome",
+                contents:_content
+              })
+            }
+        }else{this.setState({
+            mode:_mode
+          })}
         }}/>
         {this.getContents()}
         
